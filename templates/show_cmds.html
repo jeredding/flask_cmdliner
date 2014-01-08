@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_cmd') }}" method=post class=add-cmd>
+      <dl>
+        <dt>Title:
+        <dd><input type=text size=30 name=title>
+        <dt>CMD:
+        <dd><textarea name=command rows=5 cols=40></textarea>
+        <dd><input type=submit value=Share>
+      </dl>
+    </form>
+  {% endif %}
+  <ul class=cmds>
+  {% for id in cmds %}
+    id
+    <li><h2>{{ cmds[id]['title'] }}</h2><a href="javascript:RunCmd({{id}})">{{ cmds[id]['command']|safe }}</a> <a href="{{ url_for('rm_cmd') }}" method="delete" > rm </a>
+  {% else %}
+    <li><em>Unbelievable.  No commands here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
